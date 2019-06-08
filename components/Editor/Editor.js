@@ -1,13 +1,17 @@
 import React, { Fragment, useEffect, useState } from "react";
+import Recon from "@thesherwood/reconjs";
+import EditorError from "../EditorError/EditorError";
 
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/material.css";
 
 let CodeMirror;
+const r = new Recon();
 
 const Editor = () => {
   const [render, setRender] = useState(false);
   const [editorValue, setEditorValue] = useState("");
+  const [errors, setErrors] = useState("");
 
   useEffect(() => {
     CodeMirror = require("react-codemirror2");
@@ -17,6 +21,11 @@ const Editor = () => {
 
   const handleSubmit = () => {
     console.log(editorValue);
+    try {
+      setErrors(r.check(editorValue));
+    } catch (err) {
+      setErrors(err);
+    }
   };
 
   if (!render || !CodeMirror) {
@@ -38,6 +47,7 @@ const Editor = () => {
         onChange={(editor, data, value) => {}}
       />
       <button onClick={handleSubmit}>Submit</button>
+      <EditorError errors={errors} />
       <style global jsx>
         {`
           .CodeMirror {
