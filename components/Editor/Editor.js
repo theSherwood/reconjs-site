@@ -38,6 +38,13 @@ const Editor = () => {
         onChange={(editor, data, value) => {}}
       />
       <button onClick={handleSubmit}>Submit</button>
+      <style global jsx>
+        {`
+          .CodeMirror {
+            font-size: 1.5em;
+          }
+        `}
+      </style>
     </Fragment>
   );
 };
