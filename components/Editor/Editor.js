@@ -1,46 +1,45 @@
-import React, { Component } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/material.css";
 
 let CodeMirror;
 
-class Editor extends Component {
-  state = {
-    render: false
-  };
+const Editor = () => {
+  const [render, setRender] = useState(false);
+  const [editorValue, setEditorValue] = useState("");
 
-  componentDidMount = () => {
-    console.log("mounting");
+  useEffect(() => {
     CodeMirror = require("react-codemirror2");
     require("codemirror/mode/javascript/javascript");
-    this.setState({ render: true });
+    setRender(true);
+  }, []);
+
+  const handleSubmit = () => {
+    console.log(editorValue);
   };
 
-  render() {
-    const { render } = this.state;
-    console.log("render");
-    if (!render || !CodeMirror) {
-      console.log("not rendering");
-      return null;
-    }
-    const { Controlled } = CodeMirror;
-    // return <p>Weird</p>;
-    return (
+  if (!render || !CodeMirror) {
+    return null;
+  }
+  const { Controlled } = CodeMirror;
+  return (
+    <Fragment>
       <Controlled
-        value={this.state.value}
+        value={editorValue}
         options={{
           mode: "javascript",
           theme: "material",
           lineNumbers: true
         }}
         onBeforeChange={(editor, data, value) => {
-          this.setState({ value });
+          setEditorValue(value);
         }}
         onChange={(editor, data, value) => {}}
       />
-    );
-  }
-}
+      <button onClick={handleSubmit}>Submit</button>
+    </Fragment>
+  );
+};
 
 export default Editor;
