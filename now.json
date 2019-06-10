@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "alias": "reconjs",
+  "name": "reconjs-site",
+  "builds": [
+    {
+      "src": "next.config.js",
+      "use": "@now/next"
+    },
+    {
+      "src": "testLambda.js",
+      "use": "@now/node"
+    },
+    {
+      "src": "api/**",
+      "use": "@now/node"
+    }
+  ],
+  "env": {
+    "TEST_VARIABLE": "@test-variable",
+    "MONGO_URI": "@mongo_uri"
+  }
+}
