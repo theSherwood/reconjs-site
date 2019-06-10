@@ -20,10 +20,11 @@ const Editor = () => {
   }, []);
 
   const handleSubmit = () => {
-    console.log(editorValue);
     try {
+      // console.log(r.check(editorValue));
       setErrors(r.check(editorValue));
     } catch (err) {
+      // console.log(err);
       setErrors(err);
     }
   };
