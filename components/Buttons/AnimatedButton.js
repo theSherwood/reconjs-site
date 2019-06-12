@@ -2,14 +2,29 @@ import ArcadeButton from "./ArcadeButton";
 import ArcadeButtonDepressed from "./ArcadeButtonDepressed";
 import React, { useState, Fragment, useEffect } from "react";
 
-const AnimatedButton = ({ size, onClick }) => {
+const AnimatedButton = ({ size, onClick, selected, title }) => {
   const [pressed, setPressed] = useState(false);
+  const [flashing, setFlashing] = useState(false);
 
   useEffect(() => {
     if (pressed) {
       onClick();
     }
   }, [pressed]);
+
+  useEffect(() => {
+    if (selected) {
+      let flash = flashing;
+      const intervalId = setInterval(() => {
+        flash = !flash;
+        setFlashing(flash);
+      }, 400);
+
+      return () => {
+        clearInterval(intervalId);
+      };
+    }
+  }, [selected]);
 
   const handleMouseDown = () => {
     setPressed(true);
@@ -21,17 +36,20 @@ const AnimatedButton = ({ size, onClick }) => {
 
   return (
     <Fragment>
-      <button
-        className="invisible-btn"
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
-      >
-        <ArcadeButton size={size} />
-        <div className={pressed ? "svg-overlay pressed" : "svg-overlay"}>
-          <ArcadeButtonDepressed size={size} />
-        </div>
-      </button>
+      <div className={flashing ? "highlight-btn flash" : "highlight-btn"}>
+        <button
+          className="invisible-btn"
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
+          title={title}
+        >
+          <ArcadeButton size={size} />
+          <div className={pressed ? "svg-overlay pressed" : "svg-overlay"}>
+            <ArcadeButtonDepressed size={size} />
+          </div>
+        </button>
+      </div>
       <style jsx>{`
         button {
           background: none;
@@ -53,6 +71,17 @@ const AnimatedButton = ({ size, onClick }) => {
 
         .pressed {
           opacity: 0.8;
+        }
+
+        .highlight-btn {
+          background: white;
+          padding: 5px 5px 0px 5px;
+          border-radius: 100%;
+          height: min-content;
+        }
+
+        .highlight-btn.flash {
+          background: transparent;
         }
       `}</style>
     </Fragment>
