@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import Recon from "@thesherwood/reconjs";
 import EditorError from "../EditorError/EditorError";
+import AnimatedButton from "../Buttons/AnimatedButton";
 
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/material.css";
@@ -54,9 +55,14 @@ const Editor = () => {
   if (!render || !CodeMirror) {
     return null;
   }
+
+  const handleButtonClick = e => {
+    console.log(e.target);
+  };
+
   const { Controlled } = CodeMirror;
   return (
-    <Fragment>
+    <div className="editor-container">
       <Controlled
         value={editorValue}
         options={{
@@ -69,7 +75,9 @@ const Editor = () => {
         }}
         onChange={(editor, data, value) => {}}
       />
-      <button onClick={handleSubmit}>Submit</button>
+      {/*Vector Illustration by <a href="https://vecteezy.com">www.Vecteezy.com</a>*/}
+      <AnimatedButton onClick={handleSubmit} />
+
       <EditorError errors={errors} />
       <style global jsx>
         {`
@@ -78,7 +86,20 @@ const Editor = () => {
           }
         `}
       </style>
-    </Fragment>
+      <style jsx>
+        {`
+          .editor-container {
+            max-width: 700px;
+            width: 95%;
+            margin: auto;
+          }
+
+          .react-codemirror2 {
+            width: 100%;
+          }
+        `}
+      </style>
+    </div>
   );
 };
 
