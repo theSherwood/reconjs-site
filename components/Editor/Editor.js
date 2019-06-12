@@ -11,7 +11,9 @@ const r = new Recon();
 
 const Editor = () => {
   const [render, setRender] = useState(false);
-  const [editorValue, setEditorValue] = useState("");
+  const [editorValue, setEditorValue] = useState(
+    "/*\nAttempt to get past ReconJS's static security checks:\n\nChange the value of window.target from within the arcade console and add your name to the list of victors!\n*/"
+  );
   const [errors, setErrors] = useState({});
   const [showModal, setShowModal] = useState(false);
 
@@ -23,7 +25,7 @@ const Editor = () => {
 
   useEffect(() => {
     if (Object.keys(errors).length) {
-      setShowModal(true);
+      setShowModal(1);
     }
   }, [errors]);
 
@@ -75,7 +77,7 @@ const Editor = () => {
   };
 
   const toggleScreens = () => {
-    setShowModal(!showModal);
+    setShowModal(showModal + 1);
   };
 
   const handleKeyDown = e => {
@@ -114,7 +116,11 @@ const Editor = () => {
             }}
             onChange={(editor, data, value) => {}}
           />
-          {showModal ? <Modal errors={errors} /> : null}
+          {showModal % 3 === 0 ? null : showModal % 3 === 1 ? (
+            <Modal errors={errors} />
+          ) : (
+            <Modal victors />
+          )}
         </div>
       </div>
       <div className="console-wrapper">
@@ -128,7 +134,7 @@ const Editor = () => {
           <AnimatedButton
             onClick={toggleScreens}
             size="64"
-            selected={showModal}
+            selected={!!(showModal % 3)}
             title="Toggle Screens (Ctrl-Space)"
           />
         </div>
@@ -206,7 +212,7 @@ const Editor = () => {
           #screen {
             position: relative;
             background-color: #263238;
-            min-height: 20rem;
+            min-height: 250px;
             border-radius: 50% / 10%;
             margin: 0 auto;
             width: 85%;
@@ -269,6 +275,10 @@ const Editor = () => {
             h1 {
               font-size: 1.8em;
             }
+
+            .console {
+              padding: 10px 0px;
+            }
           }
 
           @media only screen and (max-width: 500px) {
@@ -279,6 +289,10 @@ const Editor = () => {
 
             h1 {
               font-size: 1.4em;
+            }
+
+            .console {
+              padding: 5px 0px;
             }
           }
 

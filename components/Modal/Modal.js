@@ -1,12 +1,13 @@
 import React, { Fragment } from "react";
 import EditorError from "../EditorError/EditorError";
 
-const Modal = ({ errors }) => {
+const Modal = ({ errors, victors }) => {
   return (
     <Fragment>
       <div className="modal-container">
         <p>Here is some text</p>
-        <EditorError errors={errors} />
+        {errors ? <EditorError errors={errors} /> : null}
+        {victors ? <p>TODO: victors</p> : null}
       </div>
       <style jsx>{`
         .modal-container {
