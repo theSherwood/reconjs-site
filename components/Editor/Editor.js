@@ -28,7 +28,20 @@ const Editor = () => {
         if (results) {
           setErrors(results);
         } else {
-          sumbitToServer(editorValue);
+          const targetString = Math.random.toString();
+          window.target = targetString;
+          const evalGlobal = eval;
+          evalGlobal(editorValue);
+          if (window.target !== targetString) {
+            sumbitToServer(editorValue);
+          } else {
+            setErrors({
+              name: "Failure",
+              message:
+                "your code passed the security check but window.target was unaffected"
+            });
+          }
+          delete window.target;
         }
       } catch (err) {
         setErrors(err);
@@ -51,14 +64,17 @@ const Editor = () => {
     })
       .then(res => res.json())
       .then(data => console.log(data))
-      .catch(err => {
-        console.log("client-side error");
-        console.log(err);
-      });
+      .catch(err => console.log(err));
   };
 
   const triggerModal = () => {
     console.log("trigger modal...");
+  };
+
+  const handleKeyDown = e => {
+    if (e.key === "Enter" && e.ctrlKey) {
+      console.log("ctrl-enter...");
+    }
   };
 
   if (!render || !CodeMirror) {
@@ -67,7 +83,7 @@ const Editor = () => {
 
   const { Controlled } = CodeMirror;
   return (
-    <div className="editor-container">
+    <div className="editor-container" onKeyDown={handleKeyDown}>
       <div id="screen-wrapper">
         <div id="screen">
           <Controlled
@@ -87,17 +103,29 @@ const Editor = () => {
       <div className="console-wrapper">
         <div className="console">
           {/*Vector Illustration by <a href="https://vecteezy.com">www.Vecteezy.com</a>*/}
-          <AnimatedButton onClick={handleSubmit} size="64" />
-          <h1>ReconJS</h1>
-          <AnimatedButton onClick={triggerModal} size="64" />
+          <AnimatedButton onClick={handleSubmit} size="64" title="Submit" />
+          <h1>Recon JS</h1>
+          <AnimatedButton
+            onClick={triggerModal}
+            size="64"
+            selected={false}
+            title="Toggle Screens"
+          />
         </div>
       </div>
       <EditorError errors={errors} />
+
       <style global jsx>
         {`
           .CodeMirror {
             font-size: 1.5em;
-            height: 400px;
+            height: 500px;
+          }
+
+          @media only screen and (max-width: 600px) {
+            .CodeMirror {
+              height: 400px;
+            }
           }
 
           @media only screen and (max-width: 500px) {
@@ -109,6 +137,11 @@ const Editor = () => {
       </style>
       <style jsx>
         {`
+          @font-face {
+            font-family: "SEGA";
+            src: url("../../static/SEGA.TTF");
+          }
+
           .editor-container {
             max-width: 800px;
             width: 95%;
@@ -120,6 +153,8 @@ const Editor = () => {
               rgba(0, 0, 0, 1) 60%,
               rgba(27, 27, 27, 1) 100%
             );
+            border-left: solid 3px white;
+            border-right: solid 4px white;
           }
 
           .react-codemirror2 {
@@ -141,7 +176,7 @@ const Editor = () => {
             margin: 0 auto;
             width: 85%;
             flex: 1;
-            padding: 1.5rem 1rem;
+            padding: 2.5rem 1rem;
           }
 
           #screen:before {
@@ -184,7 +219,10 @@ const Editor = () => {
           }
 
           h1 {
-            font-family: arial;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-family: SEGA, arial;
             transform: rotateX(10deg) translateZ(5px);
             color: white;
           }
@@ -192,6 +230,7 @@ const Editor = () => {
           @media only screen and (max-width: 600px) {
             #screen {
               width: 80%;
+              padding: 1.5rem 1rem;
             }
 
             h1 {
@@ -207,6 +246,12 @@ const Editor = () => {
 
             h1 {
               font-size: 1.4em;
+            }
+          }
+
+          @media only screen and (max-width: 400px) {
+            h1 {
+              font-size: 1.2em;
             }
           }
         `}
