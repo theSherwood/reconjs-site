@@ -1,6 +1,7 @@
 const EditorError = props => {
   const { errors } = props;
-  if (!errors) return null;
+  console.log(errors);
+  if (!errors || !Object.keys(errors).length) return null;
   let errs;
   if (Array.isArray(errors)) {
     errs = errors.map(error => {
