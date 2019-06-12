@@ -21,12 +21,34 @@ const Editor = () => {
 
   const handleSubmit = () => {
     try {
-      // console.log(r.check(editorValue));
-      setErrors(r.check(editorValue));
+      const results = r.check(editorValue);
+      if (results) {
+        setErrors(results);
+      } else {
+        sumbitToServer(editorValue);
+      }
     } catch (err) {
-      // console.log(err);
       setErrors(err);
     }
+  };
+
+  const sumbitToServer = code => {
+    fetch("/api/breach.js", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        code
+      })
+    })
+      .then(res => res.json())
+      .then(data => console.log(data))
+      .catch(err => {
+        console.log("client-side error");
+        console.log(err);
+      });
   };
 
   if (!render || !CodeMirror) {
