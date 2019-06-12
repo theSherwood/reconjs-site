@@ -1,7 +1,7 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState, useRef } from "react";
 import Recon from "@thesherwood/reconjs";
-import EditorError from "../EditorError/EditorError";
 import AnimatedButton from "../Buttons/AnimatedButton";
+import Modal from "../Modal/Modal";
 
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/material.css";
@@ -13,12 +13,19 @@ const Editor = () => {
   const [render, setRender] = useState(false);
   const [editorValue, setEditorValue] = useState("");
   const [errors, setErrors] = useState({});
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     CodeMirror = require("react-codemirror2");
     require("codemirror/mode/javascript/javascript");
     setRender(true);
   }, []);
+
+  useEffect(() => {
+    if (Object.keys(errors).length) {
+      setShowModal(true);
+    }
+  }, [errors]);
 
   const handleSubmit = () => {
     setErrors({});
@@ -67,13 +74,17 @@ const Editor = () => {
       .catch(err => console.log(err));
   };
 
-  const triggerModal = () => {
-    console.log("trigger modal...");
+  const toggleScreens = () => {
+    setShowModal(!showModal);
   };
 
   const handleKeyDown = e => {
-    if (e.key === "Enter" && e.ctrlKey) {
-      console.log("ctrl-enter...");
+    if (e.ctrlKey) {
+      if (e.key === "Enter") {
+        handleSubmit();
+      } else if (e.key === " ") {
+        toggleScreens();
+      }
     }
   };
 
@@ -91,29 +102,35 @@ const Editor = () => {
             options={{
               mode: "javascript",
               theme: "material",
-              lineNumbers: true
+              lineNumbers: true,
+              lineWrapping: true,
+              tabSize: 2
             }}
             onBeforeChange={(editor, data, value) => {
               setEditorValue(value);
             }}
             onChange={(editor, data, value) => {}}
           />
+          {showModal ? <Modal errors={errors} /> : null}
         </div>
       </div>
       <div className="console-wrapper">
         <div className="console">
           {/*Vector Illustration by <a href="https://vecteezy.com">www.Vecteezy.com</a>*/}
-          <AnimatedButton onClick={handleSubmit} size="64" title="Submit" />
+          <AnimatedButton
+            onClick={handleSubmit}
+            size="64"
+            title="Submit (Ctrl-Enter)"
+          />
           <h1>Recon JS</h1>
           <AnimatedButton
-            onClick={triggerModal}
+            onClick={toggleScreens}
             size="64"
-            selected={false}
-            title="Toggle Screens"
+            selected={showModal}
+            title="Toggle Screens (Ctrl-Space)"
           />
         </div>
       </div>
-      <EditorError errors={errors} />
 
       <style global jsx>
         {`
@@ -130,7 +147,7 @@ const Editor = () => {
 
           @media only screen and (max-width: 500px) {
             .CodeMirror {
-              height: 300px;
+              height: 250px;
             }
           }
         `}
