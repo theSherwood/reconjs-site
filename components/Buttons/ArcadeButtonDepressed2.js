@@ -1,0 +1,320 @@
+export default () => (
+  <svg
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlnsXlink="http://www.w3.org/1999/xlink"
+    preserveAspectRatio="xMidYMid meet"
+    viewBox="0 0 640 640"
+    width="64"
+    height="64"
+  >
+    <defs>
+      <path
+        d="M576.99 320C576.99 461.83 461.83 576.99 320 576.99C178.17 576.99 63.01 461.83 63.01 320C63.01 178.17 178.17 63.01 320 63.01C461.83 63.01 576.99 178.17 576.99 320Z"
+        id="b1f6NgzG7N"
+      />
+      <radialGradient
+        id="gradientb34bpXD7Iz"
+        gradientUnits="userSpaceOnUse"
+        cx="320"
+        cy="320"
+        dx="320"
+        dy="576.99"
+        r="256.99"
+      >
+        <stop style={{ stopColor: "#000000", stopOpacity: "0" }} offset="0%" />
+        <stop
+          style={{ stopColor: "#010000", stopOpacity: "0.22" }}
+          offset="90.6372720618655%"
+        />
+        <stop
+          style={{ stopColor: "#010000", stopOpacity: "0.75" }}
+          offset="100%"
+        />
+      </radialGradient>
+      <path
+        d="M640 320C640 496.61 496.61 640 320 640C143.39 640 0 496.61 0 320C0 143.39 143.39 0 320 0C496.61 0 640 143.39 640 320Z"
+        id="a9RQoBuIM"
+      />
+      <radialGradient
+        id="gradientakB2xFRDK"
+        gradientUnits="userSpaceOnUse"
+        cx="311.64"
+        cy="300.52"
+        dx="331.94"
+        dy="629.85"
+        r="329.96"
+      >
+        <stop style={{ stopColor: "#ed0707", stopOpacity: "1" }} offset="0%" />
+        <stop
+          style={{ stopColor: "#de1a1a", stopOpacity: "1" }}
+          offset="85.3194821485039%"
+        />
+        <stop
+          style={{ stopColor: "#510909", stopOpacity: "1" }}
+          offset="100%"
+        />
+      </radialGradient>
+      <path
+        d="M565.34 320C565.34 455.41 455.41 565.34 320 565.34C184.59 565.34 74.66 455.41 74.66 320C74.66 184.59 184.59 74.66 320 74.66C455.41 74.66 565.34 184.59 565.34 320Z"
+        id="igBSuijDg"
+      />
+      <path
+        d="M600.15 320.07C600.15 474.65 474.65 600.15 320.07 600.15C165.5 600.15 40 474.65 40 320.07C40 165.5 165.5 40 320.07 40C474.65 40 600.15 165.5 600.15 320.07Z"
+        id="dYarbiSOP"
+      />
+      <radialGradient
+        id="gradientby1Rs869"
+        gradientUnits="userSpaceOnUse"
+        cx="320"
+        cy="320"
+        dx="320"
+        dy="600"
+        r="280"
+      >
+        <stop style={{ stopColor: "#020000", stopOpacity: "1" }} offset="0%" />
+        <stop
+          style={{ stopColor: "#000000", stopOpacity: "1" }}
+          offset="92.85714285714286%"
+        />
+        <stop
+          style={{ stopColor: "#aa0000", stopOpacity: "1" }}
+          offset="100%"
+        />
+      </radialGradient>
+      <path
+        d="M590.43 320C590.43 469.26 469.26 590.43 320 590.43C170.74 590.43 49.57 469.26 49.57 320C49.57 170.74 170.74 49.57 320 49.57C469.26 49.57 590.43 170.74 590.43 320Z"
+        id="aHBMgh0VG"
+      />
+      <path
+        d="M576.99 320C576.99 461.83 461.83 576.99 320 576.99C178.17 576.99 63.01 461.83 63.01 320C63.01 178.17 178.17 63.01 320 63.01C461.83 63.01 576.99 178.17 576.99 320Z"
+        id="b1NduAOK0q"
+      />
+      <path
+        d="M421.55 42.06C421.55 42.06 421.55 42.06 421.55 42.06C265.26 -12.93 93.98 69.19 38.99 225.48C38.99 225.48 38.99 225.48 38.99 225.48"
+        id="bRdUYSApH"
+      />
+      <path
+        d="M484.23 240.71C506.36 329.36 446.99 420.64 351.73 444.41C256.47 468.18 161.18 415.51 139.05 326.85C116.93 238.2 176.3 146.93 271.56 123.15C366.81 99.38 462.11 152.06 484.23 240.71Z"
+        id="bd8YQjLG8"
+      />
+      <linearGradient
+        id="gradientavTGaUD2h"
+        gradientUnits="userSpaceOnUse"
+        x1="299.67"
+        y1="228.25"
+        x2="253.71"
+        y2="89.81"
+      >
+        <stop style={{ stopColor: "#d11515", stopOpacity: "1" }} offset="0%" />
+        <stop
+          style={{ stopColor: "#b11414", stopOpacity: "1" }}
+          offset="24.679632700536384%"
+        />
+        <stop
+          style={{ stopColor: "#010000", stopOpacity: "0.48" }}
+          offset="100%"
+        />
+      </linearGradient>
+      <path
+        d="M456.19 135.55C453.31 133.58 451.52 132.35 450.8 131.86C390.28 90.36 318.66 82.2 255.21 101.08C187.84 121.13 129.68 171.68 103.81 245.18C103.81 245.18 103.81 245.18 103.81 245.18"
+        id="a2DgEvEa6u"
+      />
+      <path
+        d="M576.99 320C576.99 461.83 461.83 576.99 320 576.99C178.17 576.99 63.01 461.83 63.01 320C63.01 178.17 178.17 63.01 320 63.01C461.83 63.01 576.99 178.17 576.99 320Z"
+        id="bHxAp7QTv"
+      />
+      <radialGradient
+        id="gradienteLqCsFsM6"
+        gradientUnits="userSpaceOnUse"
+        cx="320"
+        cy="320"
+        dx="320"
+        dy="576.99"
+        r="256.99"
+      >
+        <stop
+          style={{ stopColor: "#000000", stopOpacity: "0.51" }}
+          offset="0%"
+        />
+        <stop
+          style={{ stopColor: "#000000", stopOpacity: "0.73" }}
+          offset="90.6372720618655%"
+        />
+        <stop
+          style={{ stopColor: "#010000", stopOpacity: "0.99" }}
+          offset="100%"
+        />
+      </radialGradient>
+      <path
+        d="M220 598.84C220 598.84 220 598.84 220 598.84C376.29 653.83 547.57 571.71 602.57 415.42C602.57 415.42 602.57 415.42 602.57 415.42"
+        id="aJjd6gKt7"
+      />
+      <path
+        d="M186.27 506.26C189.14 508.23 190.94 509.47 191.66 509.96C252.17 551.46 323.8 559.62 387.25 540.74C454.62 520.69 512.78 470.14 538.64 396.64C538.64 396.64 538.64 396.64 538.64 396.64"
+        id="d3Aul9nVM"
+      />
+    </defs>
+    <g>
+      <g>
+        <g>
+          <use
+            xlinkHref="#b1f6NgzG7N"
+            opacity="1"
+            fill="url(#gradientb34bpXD7Iz)"
+          />
+          <g>
+            <use
+              xlinkHref="#b1f6NgzG7N"
+              opacity="1"
+              fillOpacity="0"
+              stroke="#dc1592"
+              strokeWidth="0"
+              strokeOpacity="0"
+            />
+          </g>
+        </g>
+        <g>
+          <use
+            xlinkHref="#a9RQoBuIM"
+            opacity="1"
+            fill="url(#gradientakB2xFRDK)"
+          />
+        </g>
+        <g>
+          <use
+            xlinkHref="#igBSuijDg"
+            opacity="1"
+            fill="#fe0101"
+            fillOpacity="1"
+          />
+        </g>
+        <g>
+          <use
+            xlinkHref="#dYarbiSOP"
+            opacity="1"
+            fill="url(#gradientby1Rs869)"
+          />
+          <g>
+            <use
+              xlinkHref="#dYarbiSOP"
+              opacity="1"
+              fillOpacity="0"
+              stroke="#dc1591"
+              strokeWidth="1"
+              strokeOpacity="0"
+            />
+          </g>
+        </g>
+        <g>
+          <use
+            xlinkHref="#aHBMgh0VG"
+            opacity="1"
+            fill="#240000"
+            fillOpacity="1"
+          />
+          <g>
+            <use
+              xlinkHref="#aHBMgh0VG"
+              opacity="1"
+              fillOpacity="0"
+              stroke="#dc1591"
+              strokeWidth="1"
+              strokeOpacity="0"
+            />
+          </g>
+        </g>
+        <g>
+          <use
+            xlinkHref="#b1NduAOK0q"
+            opacity="1"
+            fill="#d11515"
+            fillOpacity="1"
+          />
+          <g>
+            <use
+              xlinkHref="#b1NduAOK0q"
+              opacity="1"
+              fillOpacity="0"
+              stroke="#dc1592"
+              strokeWidth="0"
+              strokeOpacity="0"
+            />
+          </g>
+        </g>
+        <g>
+          <g>
+            <use
+              xlinkHref="#bRdUYSApH"
+              opacity="1"
+              fillOpacity="0"
+              stroke="#f0efef"
+              strokeWidth="15"
+              strokeOpacity="0.61"
+            />
+          </g>
+        </g>
+        <g>
+          <use
+            xlinkHref="#bd8YQjLG8"
+            opacity="1"
+            fill="url(#gradientavTGaUD2h)"
+          />
+        </g>
+        <g>
+          <g>
+            <use
+              xlinkHref="#a2DgEvEa6u"
+              opacity="1"
+              fillOpacity="0"
+              stroke="#ffcbcb"
+              strokeWidth="10"
+              strokeOpacity="0.77"
+            />
+          </g>
+        </g>
+        <g>
+          <use
+            xlinkHref="#bHxAp7QTv"
+            opacity="1"
+            fill="url(#gradienteLqCsFsM6)"
+          />
+          <g>
+            <use
+              xlinkHref="#bHxAp7QTv"
+              opacity="1"
+              fillOpacity="0"
+              stroke="#dc1591"
+              strokeWidth="0"
+              strokeOpacity="0"
+            />
+          </g>
+        </g>
+        <g>
+          <g>
+            <use
+              xlinkHref="#aJjd6gKt7"
+              opacity="1"
+              fillOpacity="0"
+              stroke="#f0efef"
+              strokeWidth="33"
+              strokeOpacity="0.24"
+            />
+          </g>
+        </g>
+        <g>
+          <g>
+            <use
+              xlinkHref="#d3Aul9nVM"
+              opacity="1"
+              fillOpacity="0"
+              stroke="#f0efef"
+              strokeWidth="12"
+              strokeOpacity="0.16"
+            />
+          </g>
+        </g>
+      </g>
+    </g>
+  </svg>
+);
