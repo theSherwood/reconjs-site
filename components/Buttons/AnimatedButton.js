@@ -40,6 +40,7 @@ const AnimatedButton = ({ size, onClick }) => {
           padding: 0;
           margin: 0;
           position: relative;
+          height: min-content;
         }
 
         .svg-overlay {
