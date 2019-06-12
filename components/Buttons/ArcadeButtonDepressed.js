@@ -1,4 +1,4 @@
-export default () => (
+export default ({ size }) => (
   <svg
     id="master-artboard"
     viewBox="0 0 362.9915466308594 361.3456726074219"
@@ -7,8 +7,8 @@ export default () => (
     x="0px"
     y="0px"
     style={{ enableBackground: "new 0 0 1400 980" }}
-    width="64px"
-    height="64px"
+    width={size + "px"}
+    height={size + "px"}
     xmlnsXlink="http://www.w3.org/1999/xlink"
   >
     <defs>
