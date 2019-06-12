@@ -34,7 +34,7 @@ const Editor = () => {
         setErrors(err);
       }
     } else {
-      setErrors({ name: "Error", message: "You must enter some code" });
+      setErrors({ name: "Error", message: "you must enter some code" });
     }
   };
 
@@ -68,18 +68,20 @@ const Editor = () => {
   const { Controlled } = CodeMirror;
   return (
     <div className="editor-container">
-      <Controlled
-        value={editorValue}
-        options={{
-          mode: "javascript",
-          theme: "material",
-          lineNumbers: true
-        }}
-        onBeforeChange={(editor, data, value) => {
-          setEditorValue(value);
-        }}
-        onChange={(editor, data, value) => {}}
-      />
+      <div id="screen">
+        <Controlled
+          value={editorValue}
+          options={{
+            mode: "javascript",
+            theme: "material",
+            lineNumbers: true
+          }}
+          onBeforeChange={(editor, data, value) => {
+            setEditorValue(value);
+          }}
+          onChange={(editor, data, value) => {}}
+        />
+      </div>
       {/*Vector Illustration by <a href="https://vecteezy.com">www.Vecteezy.com</a>*/}
       <AnimatedButton onClick={handleSubmit} size="64" />
 
@@ -101,6 +103,31 @@ const Editor = () => {
 
           .react-codemirror2 {
             width: 100%;
+            margin: 20px auto;
+          }
+
+          /* https://codepen.io/mikehaart/pen/qwbdLJ */
+          #screen {
+            position: relative;
+            background-color: #263238;
+            min-height: 20rem;
+            width: 90%;
+            border-radius: 50% / 10%;
+            margin: 0 auto;
+            flex: 1;
+            padding: 1.5rem 1rem;
+          }
+
+          #screen:before {
+            content: "";
+            position: absolute;
+            z-index: -999;
+            top: 8%;
+            bottom: 8%;
+            right: -4%;
+            left: -4%;
+            background-color: #263238;
+            border-radius: 5% / 50%;
           }
         `}
       </style>
