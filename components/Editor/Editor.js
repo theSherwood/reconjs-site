@@ -95,6 +95,9 @@ const Editor = () => {
   const { Controlled } = CodeMirror;
   return (
     <div className="editor-container" onKeyDown={handleKeyDown}>
+      <div className="title-board">
+        <h1>Recon JS</h1>
+      </div>
       <div id="screen-wrapper">
         <div id="screen">
           <Controlled
@@ -122,7 +125,6 @@ const Editor = () => {
             size="64"
             title="Submit (Ctrl-Enter)"
           />
-          <h1>Recon JS</h1>
           <AnimatedButton
             onClick={toggleScreens}
             size="64"
@@ -136,12 +138,12 @@ const Editor = () => {
         {`
           .CodeMirror {
             font-size: 1.5em;
-            height: 500px;
+            height: 450px;
           }
 
           @media only screen and (max-width: 600px) {
             .CodeMirror {
-              height: 400px;
+              height: 350px;
             }
           }
 
@@ -170,13 +172,29 @@ const Editor = () => {
               rgba(0, 0, 0, 1) 60%,
               rgba(27, 27, 27, 1) 100%
             );
-            border-left: solid 3px white;
+            border-left: solid 4px white;
             border-right: solid 4px white;
           }
 
           .react-codemirror2 {
             width: 100%;
             margin: 20px auto;
+          }
+
+          .title-board {
+            padding: 1px 1px;
+            text-align: center;
+            background-color: rgb(27, 27, 27);
+            background-image: radial-gradient(
+              circle,
+              rgba(77, 77, 77, 1) 4%,
+              rgba(10, 10, 10, 1) 100%
+            );
+            font-size: 1.6em;
+          }
+
+          .title-board h1 {
+            margin: 0.1em;
           }
 
           #screen-wrapper {
@@ -220,14 +238,12 @@ const Editor = () => {
             justify-content: space-around;
             padding: 15px 0px;
             border: solid 1px black;
-            // background: rgba(17, 17, 17, 1);
             transform-style: preserve-3d;
             transform: rotateX(15deg);
             perspective: 1000px;
             width: 95%;
             margin: 0 auto;
-
-            // background-color: rgb(27, 27, 27);
+            background-color: rgb(27, 27, 27);
             background-image: radial-gradient(
               circle,
               rgba(37, 37, 37, 1) 4%,
