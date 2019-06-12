@@ -21,6 +21,7 @@ const AnimatedButton = ({ size, onClick, selected, title }) => {
       }, 400);
 
       return () => {
+        setFlashing(false);
         clearInterval(intervalId);
       };
     }
