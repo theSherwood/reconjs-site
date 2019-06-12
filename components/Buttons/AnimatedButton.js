@@ -19,8 +19,6 @@ const AnimatedButton = ({ size, onClick }) => {
     setPressed(false);
   };
 
-  const contents = pressed ? <ArcadeButtonDepressed /> : <ArcadeButton />;
-
   return (
     <Fragment>
       <button
@@ -29,15 +27,31 @@ const AnimatedButton = ({ size, onClick }) => {
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
       >
-        {contents}
+        <ArcadeButton size={size} />
+        <div className={pressed ? "svg-overlay pressed" : "svg-overlay"}>
+          <ArcadeButtonDepressed size={size} />
+        </div>
       </button>
-      <style global jsx>{`
-        .invisible-btn {
+      <style jsx>{`
+        button {
           background: none;
           outline: none;
           border: none;
-          padding: none;
-          margin: none;
+          padding: 0;
+          margin: 0;
+          position: relative;
+        }
+
+        .svg-overlay {
+          position: absolute;
+          left: 0;
+          top: 0;
+          opacity: 0;
+          transition: opacity 100ms ease-in;
+        }
+
+        .pressed {
+          opacity: 0.8;
         }
       `}</style>
     </Fragment>
