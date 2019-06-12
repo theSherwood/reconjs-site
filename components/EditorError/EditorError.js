@@ -1,6 +1,5 @@
 const EditorError = props => {
   const { errors } = props;
-  console.log(errors);
   if (!errors || !Object.keys(errors).length) return null;
   let errs;
   if (Array.isArray(errors)) {
