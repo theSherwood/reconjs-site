@@ -12,7 +12,7 @@ const r = new Recon();
 const Editor = () => {
   const [render, setRender] = useState(false);
   const [editorValue, setEditorValue] = useState("");
-  const [errors, setErrors] = useState("");
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     CodeMirror = require("react-codemirror2");
@@ -21,15 +21,20 @@ const Editor = () => {
   }, []);
 
   const handleSubmit = () => {
-    try {
-      const results = r.check(editorValue);
-      if (results) {
-        setErrors(results);
-      } else {
-        sumbitToServer(editorValue);
+    setErrors({});
+    if (editorValue) {
+      try {
+        const results = r.check(editorValue);
+        if (results) {
+          setErrors(results);
+        } else {
+          sumbitToServer(editorValue);
+        }
+      } catch (err) {
+        setErrors(err);
       }
-    } catch (err) {
-      setErrors(err);
+    } else {
+      setErrors({ name: "Error", message: "You must enter some code" });
     }
   };
 
@@ -76,7 +81,7 @@ const Editor = () => {
         onChange={(editor, data, value) => {}}
       />
       {/*Vector Illustration by <a href="https://vecteezy.com">www.Vecteezy.com</a>*/}
-      <AnimatedButton onClick={handleSubmit} />
+      <AnimatedButton onClick={handleSubmit} size="64" />
 
       <EditorError errors={errors} />
       <style global jsx>
