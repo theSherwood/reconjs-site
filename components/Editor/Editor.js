@@ -2,6 +2,8 @@ import React, { Fragment, useEffect, useState, useRef } from "react";
 import Recon from "@thesherwood/reconjs";
 import AnimatedButton from "../Buttons/AnimatedButton";
 import Modal from "../Modal/Modal";
+import NpmIcon from "../Icons/NpmIcon";
+import GithubIcon from "../Icons/GithubIcon";
 
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/material.css";
@@ -94,7 +96,23 @@ const Editor = () => {
   return (
     <div className="editor-container" onKeyDown={handleKeyDown}>
       <div className="title-board">
+        <a
+          href="https://www.npmjs.com/package/@thesherwood/reconjs"
+          className="icon-link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <NpmIcon size="36" />
+        </a>
         <h1>Recon JS</h1>
+        <a
+          href="https://github.com/theSherwood/ReconJS"
+          className="icon-link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <GithubIcon size="36" />
+        </a>
       </div>
       <div id="screen-wrapper">
         <div id="screen">
@@ -190,7 +208,6 @@ const Editor = () => {
 
           .title-board {
             padding: 1px 1px;
-            text-align: center;
             background-color: rgb(27, 27, 27);
             background-image: radial-gradient(
               circle,
@@ -198,6 +215,10 @@ const Editor = () => {
               rgba(10, 10, 10, 1) 100%
             );
             font-size: 1.6em;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
           }
 
           .title-board h1 {
@@ -270,6 +291,12 @@ const Editor = () => {
             color: white;
           }
 
+          .icon-link {
+            margin: 0px 1em;
+            display: grid;
+            place-items: center;
+          }
+
           @media only screen and (max-width: 600px) {
             #screen {
               width: 80%;
@@ -305,6 +332,10 @@ const Editor = () => {
           @media only screen and (max-width: 400px) {
             h1 {
               font-size: 1.2em;
+            }
+
+            .icon-link {
+              margin: 0em 0.2em;
             }
           }
         `}
