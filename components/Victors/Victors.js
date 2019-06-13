@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const colors = "#82b1ff #80cbae #c192ea #c3e88d #e9eded #f07669".split(" ");
 
 function randColor(colors) {
@@ -12,7 +14,12 @@ function rainbowize(string) {
   ));
 }
 
-const Victors = ({ victors, newVictor }) => {
+const Victors = ({ victors, newVictor, naming }) => {
+  const handleInput = e => {
+    const value = e.target.value;
+    naming.setName(value.slice(0, 20));
+  };
+
   return (
     <div className="victor-container">
       {newVictor ? (
@@ -23,7 +30,12 @@ const Victors = ({ victors, newVictor }) => {
               "Thank you for helping us make ReconJS better! Enter your name to be added to the list of victors:"
             }
           </p>
-          <input className="input-name" size="10" />
+          <input
+            className="input-name"
+            size="10"
+            value={naming.name}
+            onChange={handleInput}
+          />
         </div>
       ) : null}
       {victors ? (
@@ -32,7 +44,7 @@ const Victors = ({ victors, newVictor }) => {
           {victors.map((victor, index) => (
             <div className="victor" key={index}>
               <h3>{rainbowize(victor.name)}</h3>
-              <h3>{rainbowize(victor.date)}</h3>
+              <h3>{rainbowize(new Date(victor.date).toLocaleDateString())}</h3>
             </div>
           ))}
         </div>
@@ -68,6 +80,7 @@ const Victors = ({ victors, newVictor }) => {
           font-family: monospace;
           font-size: 1.5em;
           color: #e9eded;
+          text-align: center;
         }
 
         .text-center {
