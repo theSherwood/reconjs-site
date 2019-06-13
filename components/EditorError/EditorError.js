@@ -23,7 +23,7 @@ const EditorError = props => {
       {errs.length ? errs.map(err => <p key={err}>{err}</p>) : null}
       <style jsx>{`
         div {
-          color: red;
+          color: #f07669;
         }
       `}</style>
     </div>
