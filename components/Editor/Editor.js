@@ -168,11 +168,6 @@ const Editor = () => {
       </style>
       <style jsx>
         {`
-          @font-face {
-            font-family: "SEGA";
-            src: url("../../static/SEGA.TTF");
-          }
-
           .editor-container {
             max-width: 800px;
             width: 95%;

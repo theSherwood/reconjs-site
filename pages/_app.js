@@ -19,6 +19,12 @@ class MyApp extends App {
 
     return (
       <Container>
+        <style global jsx>{`
+          @font-face {
+            font-family: "SEGA";
+            src: url("../static/SEGA.TTF");
+          }
+        `}</style>
         <Component {...pageProps} />
       </Container>
     );
