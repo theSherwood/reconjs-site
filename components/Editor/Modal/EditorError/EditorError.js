@@ -1,5 +1,3 @@
-import React, { Fragment } from "react";
-
 const EditorError = props => {
   const { errors } = props;
   if (!errors || !Object.keys(errors).length)

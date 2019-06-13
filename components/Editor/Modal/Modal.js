@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
-import EditorError from "../EditorError/EditorError";
-import Victors from "../Victors/Victors";
+import EditorError from "./EditorError/EditorError";
+import Victors from "./Victors/Victors";
 
 const Modal = ({
   errors,
