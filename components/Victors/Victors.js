@@ -20,19 +20,22 @@ const Victors = ({ victors, newVictor }) => {
           <h3 className="text-center">{rainbowize(" You  beat  Recon JS ")}</h3>
           <p className="text-center">
             {
-              "Enter your name and thank you for helping us make ReconJS better!"
+              "Thank you for helping us make ReconJS better! Enter your name to be added to the list of victors:"
             }
           </p>
           <input className="input-name" size="10" />
         </div>
       ) : null}
       {victors ? (
-        victors.map((victor, i) => (
-          <div className="victor" key={i}>
-            <h3>{rainbowize(victor.name)}</h3>
-            <h3>{rainbowize(victor.date)}</h3>
-          </div>
-        ))
+        <div>
+          <h2>Previous Victors:</h2>
+          {victors.map((victor, index) => (
+            <div className="victor" key={index}>
+              <h3>{rainbowize(victor.name)}</h3>
+              <h3>{rainbowize(victor.date)}</h3>
+            </div>
+          ))}
+        </div>
       ) : (
         <p>No victors currently</p>
       )}
@@ -44,13 +47,14 @@ const Victors = ({ victors, newVictor }) => {
         .victor {
           display: flex;
           flex-direction: row;
+          flex-wrap: wrap;
           justify-content: space-between;
-          font-size: 1.2em;
+          // font-size: 1.2em;
           margin: 0px 0px;
         }
 
         .victor h3 {
-          margin: 15px 0px;
+          margin: 10px 0px;
         }
 
         .input-name {
@@ -81,6 +85,24 @@ const Victors = ({ victors, newVictor }) => {
           text-rendering: optimizeLegibility;
           white-space: pre-wrap;
           line-height: 1.2em;
+        }
+
+        h2 {
+          color: #e9eded;
+          margin-bottom: 10px;
+          margin-top: 1em;
+        }
+
+        @media only screen and (max-width: 600px) {
+          .victor-container {
+            font-size: 0.9em;
+          }
+        }
+
+        @media only screen and (max-width: 500px) {
+          .victor-container {
+            font-size: 0.8em;
+          }
         }
       `}</style>
     </div>
