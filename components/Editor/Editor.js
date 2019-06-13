@@ -16,7 +16,7 @@ const Editor = () => {
 
   const { editorValue, setEditorValue, errors, setErrors } = useEditor();
 
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(2);
   const [breachId, setBreachId] = useState("");
   const [name, setName] = useState("");
   const [victors, setVictors] = useState([]);
@@ -188,11 +188,12 @@ const Editor = () => {
             font-size: 1.5em;
             height: 100%;
             z-index: 2;
+            padding: 4px;
           }
 
           .react-codemirror2 {
             height: 100%;
-            overflow-y: auto;
+            overflow: hidden;
             scrollbar-color: #546e7a transparent;
             scrollbar-width: thin;
           }
