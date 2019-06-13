@@ -25,7 +25,7 @@ const Editor = () => {
 
   useEffect(() => {
     if (Object.keys(errors).length) {
-      setShowModal(1);
+      setShowModal(2);
     }
   }, [errors]);
 
@@ -115,9 +115,9 @@ const Editor = () => {
             />
           ) : null}
           {showModal % 3 === 0 ? null : showModal % 3 === 1 ? (
-            <Modal errors={errors} />
-          ) : (
             <Modal victors />
+          ) : (
+            <Modal errors={errors} />
           )}
         </div>
       </div>
