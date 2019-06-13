@@ -4,6 +4,7 @@ import AnimatedButton from "../Buttons/AnimatedButton";
 import Modal from "../Modal/Modal";
 import NpmIcon from "../Icons/NpmIcon";
 import GithubIcon from "../Icons/GithubIcon";
+import { useEditor } from "../../state/EditorContext";
 
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/material.css";
@@ -13,10 +14,9 @@ const r = new Recon();
 
 const Editor = () => {
   const [render, setRender] = useState(false);
-  const [editorValue, setEditorValue] = useState(
-    "/*\nAttempt to get past ReconJS's static security checks:\n\nChange the value of window.target from within the arcade console and add your name to the list of victors!\n*/"
-  );
-  const [errors, setErrors] = useState({});
+
+  const { editorValue, setEditorValue, errors, setErrors } = useEditor();
+
   const [showModal, setShowModal] = useState(false);
   const [breachId, setBreachId] = useState("");
   const [name, setName] = useState("");
