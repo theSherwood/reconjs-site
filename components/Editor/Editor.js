@@ -90,11 +90,7 @@ const Editor = () => {
     }
   };
 
-  if (!render || !CodeMirror) {
-    return null;
-  }
-
-  const { Controlled } = CodeMirror;
+  const Controlled = CodeMirror ? CodeMirror.Controlled : undefined;
   return (
     <div className="editor-container" onKeyDown={handleKeyDown}>
       <div className="title-board">
@@ -102,20 +98,22 @@ const Editor = () => {
       </div>
       <div id="screen-wrapper">
         <div id="screen">
-          <Controlled
-            value={editorValue}
-            options={{
-              mode: "javascript",
-              theme: "material",
-              lineNumbers: true,
-              lineWrapping: true,
-              tabSize: 2
-            }}
-            onBeforeChange={(editor, data, value) => {
-              setEditorValue(value);
-            }}
-            onChange={(editor, data, value) => {}}
-          />
+          {render && CodeMirror ? (
+            <Controlled
+              value={editorValue}
+              options={{
+                mode: "javascript",
+                theme: "material",
+                lineNumbers: true,
+                lineWrapping: true,
+                tabSize: 2
+              }}
+              onBeforeChange={(editor, data, value) => {
+                setEditorValue(value);
+              }}
+              onChange={(editor, data, value) => {}}
+            />
+          ) : null}
           {showModal % 3 === 0 ? null : showModal % 3 === 1 ? (
             <Modal errors={errors} />
           ) : (
@@ -144,19 +142,27 @@ const Editor = () => {
         {`
           .CodeMirror {
             font-size: 1.5em;
-            height: 450px;
+            height: 100%;
+            z-index: 2;
           }
 
-          @media only screen and (max-width: 600px) {
-            .CodeMirror {
-              height: 350px;
-            }
+          .react-codemirror2 {
+            height: 100%;
+            overflow-y: auto;
+            scrollbar-color: #546e7a transparent;
+            scrollbar-width: thin;
           }
 
-          @media only screen and (max-width: 500px) {
-            .CodeMirror {
-              height: 250px;
-            }
+          .react-codemirror2::-webkit-scrollbar {
+            width: 0.5em;
+          }
+
+          .react-codemirror2::-webkit-scrollbar-track {
+            background: transparent;
+          }
+
+          .react-codemirror2::-webkit-scrollbar-thumb {
+            background-color: #546e7a;
           }
         `}
       </style>
@@ -218,6 +224,9 @@ const Editor = () => {
             width: 85%;
             flex: 1;
             padding: 2.5rem 1rem;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
           }
 
           #screen:before {
@@ -270,6 +279,7 @@ const Editor = () => {
             #screen {
               width: 80%;
               padding: 1.5rem 1rem;
+              height: 400px;
             }
 
             h1 {
@@ -285,6 +295,7 @@ const Editor = () => {
             #screen {
               width: 88%;
               padding: 1rem 0rem;
+              height: 300px;
             }
 
             h1 {
