@@ -2,13 +2,24 @@ import React, { Fragment } from "react";
 import EditorError from "../EditorError/EditorError";
 import Victors from "../Victors/Victors";
 
+const mockVictors = [
+  {
+    name: "john",
+    date: "412349"
+  },
+  {
+    name: "Jane",
+    date: "19470"
+  }
+];
+
 const Modal = ({ errors, showVictors, onKeyDown }) => {
   return (
     <Fragment>
       <div className="modal-container" onKeyDown={onKeyDown}>
         <p>Here is some text</p>
         {errors ? <EditorError errors={errors} /> : null}
-        {showVictors ? <Victors /> : null}
+        {showVictors ? <Victors victors={mockVictors} /> : null}
       </div>
       <style jsx>{`
         .modal-container {
