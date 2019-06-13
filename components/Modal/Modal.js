@@ -1,10 +1,10 @@
 import React, { Fragment } from "react";
 import EditorError from "../EditorError/EditorError";
 
-const Modal = ({ errors, victors }) => {
+const Modal = ({ errors, victors, onKeyDown }) => {
   return (
     <Fragment>
-      <div className="modal-container">
+      <div className="modal-container" onKeyDown={onKeyDown}>
         <p>Here is some text</p>
         {errors ? <EditorError errors={errors} /> : null}
         {victors ? <p>TODO: victors</p> : null}
