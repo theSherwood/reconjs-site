@@ -5,7 +5,7 @@ import "codemirror/theme/material.css";
 
 let CodeMirror;
 
-export default ({ editorValue, setEditorValue }) => {
+export default ({ editorValue, setEditorAndClear }) => {
   const [render, setRender] = useState(false);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export default ({ editorValue, setEditorValue }) => {
           tabSize: 2
         }}
         onBeforeChange={(editor, data, value) => {
-          setEditorValue(value);
+          setEditorAndClear(value);
         }}
         onChange={(editor, data, value) => {}}
       />

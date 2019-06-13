@@ -17,6 +17,11 @@ const Editor = () => {
   const [name, setName] = useState("");
   const [victors, setVictors] = useState([]);
 
+  const setEditorAndClear = code => {
+    setErrors({});
+    setEditorValue(code);
+  };
+
   useEffect(() => {
     if (Object.keys(errors).length) {
       setShowModal(2);
@@ -130,7 +135,7 @@ const Editor = () => {
         <div id="screen">
           <CodeMirrorComponent
             editorValue={editorValue}
-            setEditorValue={setEditorValue}
+            setEditorAndClear={setEditorAndClear}
           />
           {showModal % 3 === 0 ? null : showModal % 3 === 1 ? (
             <Modal
