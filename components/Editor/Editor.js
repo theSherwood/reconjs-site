@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Recon from "@thesherwood/reconjs";
 import Modal from "./Modal/Modal";
-import { useEditor } from "../../state/EditorContext";
 import TitleBar from "./TitleBar";
 import Console from "./Console";
 import CodeMirrorComponent from "./CodeMirrorComponent";
@@ -9,8 +8,10 @@ import CodeMirrorComponent from "./CodeMirrorComponent";
 const r = new Recon();
 
 const Editor = () => {
-  const { editorValue, setEditorValue, errors, setErrors } = useEditor();
-
+  const [editorValue, setEditorValue] = useState(
+    "// TODO: change the value of window.target\n"
+  );
+  const [errors, setErrors] = useState({});
   const [showModal, setShowModal] = useState(2);
   const [breachId, setBreachId] = useState("");
   const [name, setName] = useState("");
@@ -85,7 +86,10 @@ const Editor = () => {
         setErrors(err);
       }
     } else {
-      setErrors({ name: "Error", message: "you must enter some code" });
+      setErrors({
+        name: "Error",
+        message: "you must enter some code"
+      });
     }
   };
 
@@ -133,7 +137,10 @@ const Editor = () => {
               showVictors
               newVictor={!!breachId}
               onKeyDown={handleKeyDown}
-              naming={{ name, setName }}
+              naming={{
+                name,
+                setName
+              }}
               victors={victors}
             />
           ) : (
