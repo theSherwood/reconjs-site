@@ -30,9 +30,9 @@ app.post("*", (req, res) => {
     const newBreach = new Breach(req.body);
     newBreach
       .save()
-      .then(() => {
+      .then(breach => {
         res.set("Content-Type", "application/json");
-        return res.status(200).json(req.body);
+        return res.status(200).json(breach._id);
       })
       .catch(err => {
         return res.status(405).json({ error: err });
