@@ -6,6 +6,10 @@ const BreachSchema = new Schema({
   code: {
     type: String
   },
+  victor: {
+    type: Schema.Types.ObjectId,
+    ref: "victors"
+  },
   date: {
     type: Date,
     default: Date.now

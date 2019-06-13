@@ -25,16 +25,34 @@ app.post("*", (req, res) => {
     return res.status(400).json({ error: "no JSON object in the request" });
   }
   const { breachId, name } = req.body;
+  if (name.length > 20) {
+    return res
+      .status(400)
+      .json({ error: "names cannot be over 20 characters in length" });
+  }
   Breach.findById(breachId)
     .then(breach => {
-      console.log(breach);
+      // check if breach already has a victor associated
+      // bail if true
+      if (breach.victor) {
+        return res
+          .status(405)
+          .json({ error: "that breach already has an associated name" });
+      }
       const newVictor = new Victor({
         name,
         breach: breach._id
       });
       newVictor
         .save()
-        .then(() => res.status(200).json({ success: "true" }))
+        .then(victor => {
+          // point breach.victor at victor
+          breach.victor = victor._id;
+          breach
+            .save()
+            .then(() => res.status(200).json({ success: "true" }))
+            .catch(err => res.status(405).json({ error: err }));
+        })
         .catch(err => res.status(405).json({ error: err }));
     })
     .catch(err => res.status(405).json({ error: err }));
