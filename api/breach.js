@@ -26,21 +26,43 @@ app.post("*", (req, res) => {
   if (req.body == null) {
     return res.status(400).json({ error: "no JSON object in the request" });
   }
-  if(req.body.code.length > 2000) {
-    return res
-      .status(400)
-      .json({ error: "the length of your code must be fewer than 2000 characters" });
+  if (req.body.code.length > 2000) {
+    return res.status(400).json({
+      error: "the length of your code must be fewer than 2000 characters"
+    });
   }
   if (!r.check(req.body.code)) {
-    const newBreach = new Breach(req.body);
-    newBreach
-      .save()
-      .then(breach => {
-        res.set("Content-Type", "application/json");
-        return res.status(200).json(breach._id);
-      })
-      .catch(err => {
-        return res.status(405).json({ error: err });
+    // rate limit successful breaches to 10 per 24 hour period
+    const limit = 3;
+    const periodInHours = 24;
+    Breach.find()
+      .sort({ date: -1 })
+      .then(breaches => {
+        const limitedBreaches = breaches.slice(0, limit);
+        const timestampMs = Date.parse(
+          limitedBreaches[limitedBreaches.length - 1].date
+        );
+        const periodInMs = periodInHours * 1000 * 60 * 60;
+        if (
+          limitedBreaches.length === limit &&
+          Date.now() - timestampMs < periodInMs
+        ) {
+          return res.status(504).json({
+            name: "RateLimitError",
+            message: "daily rate limit exceeded on successful breaches"
+          });
+        } else {
+          const newBreach = new Breach(req.body);
+          newBreach
+            .save()
+            .then(breach => {
+              res.set("Content-Type", "application/json");
+              return res.status(200).json(breach._id);
+            })
+            .catch(err => {
+              return res.status(405).json({ error: err });
+            });
+        }
       });
   } else {
     return res

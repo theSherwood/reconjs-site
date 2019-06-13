@@ -35,9 +35,9 @@ app.post("*", (req, res) => {
       // check if breach already has a victor associated
       // bail if true
       if (breach.victor) {
-        return res
-          .status(405)
-          .json({ error: "that breach already has an associated name" });
+        return res.status(405).json({
+          error: "that breach already has an associated name"
+        });
       }
       const newVictor = new Victor({
         name,

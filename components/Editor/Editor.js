@@ -32,7 +32,6 @@ const Editor = () => {
     fetch("/api/victor.js")
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         setVictors(data);
       })
       .catch(err => console.log(err));
@@ -119,8 +118,16 @@ const Editor = () => {
       })
     })
       .then(res => res.json())
-      .then(data => setBreachId(data))
-      .catch(err => console.log(err));
+      .then(data => {
+        console.log(data);
+        setBreachId(data);
+      })
+      .catch(err => {
+        console.log(err);
+        if (err.hasOwnProperty(name) && err.name === "RateLimitError") {
+          setErrors(err);
+        }
+      });
   };
 
   const toggleScreens = () => {
