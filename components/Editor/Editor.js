@@ -1,31 +1,20 @@
-import React, { Fragment, useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import Recon from "@thesherwood/reconjs";
-import AnimatedButton from "../Buttons/AnimatedButton";
-import Modal from "../Modal/Modal";
+import Modal from "./Modal/Modal";
 import { useEditor } from "../../state/EditorContext";
 import TitleBar from "./TitleBar";
+import Console from "./Console";
+import CodeMirrorComponent from "./CodeMirrorComponent";
 
-import "codemirror/lib/codemirror.css";
-import "codemirror/theme/material.css";
-
-let CodeMirror;
 const r = new Recon();
 
 const Editor = () => {
-  const [render, setRender] = useState(false);
-
   const { editorValue, setEditorValue, errors, setErrors } = useEditor();
 
   const [showModal, setShowModal] = useState(2);
   const [breachId, setBreachId] = useState("");
   const [name, setName] = useState("");
   const [victors, setVictors] = useState([]);
-
-  useEffect(() => {
-    CodeMirror = require("react-codemirror2");
-    require("codemirror/mode/javascript/javascript");
-    setRender(true);
-  }, []);
 
   useEffect(() => {
     if (Object.keys(errors).length) {
@@ -130,28 +119,15 @@ const Editor = () => {
     }
   };
 
-  const Controlled = CodeMirror ? CodeMirror.Controlled : undefined;
   return (
     <div className="editor-container" onKeyDown={handleKeyDown}>
       <TitleBar />
       <div id="screen-wrapper">
         <div id="screen">
-          {render && CodeMirror ? (
-            <Controlled
-              value={editorValue}
-              options={{
-                mode: "javascript",
-                theme: "material",
-                lineNumbers: true,
-                lineWrapping: true,
-                tabSize: 2
-              }}
-              onBeforeChange={(editor, data, value) => {
-                setEditorValue(value);
-              }}
-              onChange={(editor, data, value) => {}}
-            />
-          ) : null}
+          <CodeMirrorComponent
+            editorValue={editorValue}
+            setEditorValue={setEditorValue}
+          />
           {showModal % 3 === 0 ? null : showModal % 3 === 1 ? (
             <Modal
               showVictors
@@ -165,52 +141,11 @@ const Editor = () => {
           )}
         </div>
       </div>
-      <div className="console-wrapper">
-        <div className="console">
-          {/*Vector Illustration by <a href="https://vecteezy.com">www.Vecteezy.com</a>*/}
-          <AnimatedButton
-            onClick={handleSubmit}
-            size="64"
-            title="Submit (Ctrl-Enter)"
-          />
-          <AnimatedButton
-            onClick={toggleScreens}
-            size="64"
-            selected={!!(showModal % 3)}
-            title="Toggle Screens (Ctrl-Space)"
-          />
-        </div>
-      </div>
-
-      <style global jsx>
-        {`
-          .CodeMirror {
-            font-size: 1.5em;
-            height: 100%;
-            z-index: 2;
-            padding: 4px;
-          }
-
-          .react-codemirror2 {
-            height: 100%;
-            overflow: hidden;
-            scrollbar-color: #546e7a transparent;
-            scrollbar-width: thin;
-          }
-
-          .react-codemirror2::-webkit-scrollbar {
-            width: 0.5em;
-          }
-
-          .react-codemirror2::-webkit-scrollbar-track {
-            background: transparent;
-          }
-
-          .react-codemirror2::-webkit-scrollbar-thumb {
-            background-color: #546e7a;
-          }
-        `}
-      </style>
+      <Console
+        handleSubmit={handleSubmit}
+        toggleScreens={toggleScreens}
+        showModal={showModal}
+      />
       <style jsx>
         {`
           .editor-container {
@@ -226,11 +161,6 @@ const Editor = () => {
             );
             border-left: solid 4px white;
             border-right: solid 4px white;
-          }
-
-          .react-codemirror2 {
-            width: 100%;
-            margin: 20px auto;
           }
 
           #screen-wrapper {
@@ -266,39 +196,11 @@ const Editor = () => {
             z-index: 1;
           }
 
-          .console-wrapper {
-            perspective: 1000px;
-          }
-
-          .console {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            justify-content: space-around;
-            padding: 15px 0px;
-            border: solid 1px black;
-            transform-style: preserve-3d;
-            transform: rotateX(15deg);
-            perspective: 1000px;
-            width: 95%;
-            margin: 0 auto;
-            background-color: rgb(27, 27, 27);
-            background-image: radial-gradient(
-              circle,
-              rgba(37, 37, 37, 1) 4%,
-              rgba(0, 0, 0, 1) 100%
-            );
-          }
-
           @media only screen and (max-width: 600px) {
             #screen {
               width: 80%;
               padding: 1.5rem 1rem;
               height: 400px;
-            }
-
-            .console {
-              padding: 10px 0px;
             }
           }
 
@@ -307,10 +209,6 @@ const Editor = () => {
               width: 88%;
               padding: 1rem 0rem;
               height: 300px;
-            }
-
-            .console {
-              padding: 5px 0px;
             }
           }
         `}
