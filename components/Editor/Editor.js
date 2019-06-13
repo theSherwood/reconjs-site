@@ -2,9 +2,8 @@ import React, { Fragment, useEffect, useState, useRef } from "react";
 import Recon from "@thesherwood/reconjs";
 import AnimatedButton from "../Buttons/AnimatedButton";
 import Modal from "../Modal/Modal";
-import NpmIcon from "../Icons/NpmIcon";
-import GithubIcon from "../Icons/GithubIcon";
 import { useEditor } from "../../state/EditorContext";
+import TitleBar from "./TitleBar";
 
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/material.css";
@@ -134,25 +133,7 @@ const Editor = () => {
   const Controlled = CodeMirror ? CodeMirror.Controlled : undefined;
   return (
     <div className="editor-container" onKeyDown={handleKeyDown}>
-      <div className="title-board">
-        <a
-          href="https://www.npmjs.com/package/@thesherwood/reconjs"
-          className="icon-link"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <NpmIcon size="36" />
-        </a>
-        <h1>Recon JS</h1>
-        <a
-          href="https://github.com/theSherwood/ReconJS"
-          className="icon-link"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <GithubIcon size="36" />
-        </a>
-      </div>
+      <TitleBar />
       <div id="screen-wrapper">
         <div id="screen">
           {render && CodeMirror ? (
@@ -251,25 +232,6 @@ const Editor = () => {
             margin: 20px auto;
           }
 
-          .title-board {
-            padding: 1px 1px;
-            background-color: rgb(27, 27, 27);
-            background-image: radial-gradient(
-              circle,
-              rgba(77, 77, 77, 1) 4%,
-              rgba(10, 10, 10, 1) 100%
-            );
-            font-size: 1.6em;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-          }
-
-          .title-board h1 {
-            margin: 0.1em;
-          }
-
           #screen-wrapper {
             padding: 10px 0px;
             z-index: -1;
@@ -327,30 +289,11 @@ const Editor = () => {
             );
           }
 
-          h1 {
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            text-rendering: optimizeLegibility;
-            font-family: SEGA, arial;
-            transform: rotateX(10deg) translateZ(5px);
-            color: white;
-          }
-
-          .icon-link {
-            margin: 0px 1em;
-            display: grid;
-            place-items: center;
-          }
-
           @media only screen and (max-width: 600px) {
             #screen {
               width: 80%;
               padding: 1.5rem 1rem;
               height: 400px;
-            }
-
-            h1 {
-              font-size: 1.8em;
             }
 
             .console {
@@ -365,22 +308,8 @@ const Editor = () => {
               height: 300px;
             }
 
-            h1 {
-              font-size: 1.4em;
-            }
-
             .console {
               padding: 5px 0px;
-            }
-          }
-
-          @media only screen and (max-width: 400px) {
-            h1 {
-              font-size: 1.2em;
-            }
-
-            .icon-link {
-              margin: 0em 0.2em;
             }
           }
         `}
