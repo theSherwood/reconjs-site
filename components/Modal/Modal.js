@@ -2,27 +2,21 @@ import React, { Fragment } from "react";
 import EditorError from "../EditorError/EditorError";
 import Victors from "../Victors/Victors";
 
-const mockVictors = [
-  {
-    name: "john",
-    date: "412349"
-  },
-  {
-    name: "Jane",
-    date: "19470"
-  },
-  {
-    name: "LongNameSusan",
-    date: "19470"
-  }
-];
-
-const Modal = ({ errors, showVictors, onKeyDown }) => {
+const Modal = ({
+  errors,
+  showVictors,
+  onKeyDown,
+  naming,
+  newVictor,
+  victors
+}) => {
   return (
     <Fragment>
       <div className="modal-container" onKeyDown={onKeyDown}>
         {errors ? <EditorError errors={errors} /> : null}
-        {showVictors ? <Victors victors={mockVictors} newVictor /> : null}
+        {showVictors ? (
+          <Victors victors={victors} newVictor={newVictor} naming={naming} />
+        ) : null}
       </div>
       <style jsx>{`
         .modal-container {
