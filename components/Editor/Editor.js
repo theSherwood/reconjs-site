@@ -68,6 +68,13 @@ const Editor = () => {
 
   const submitCode = () => {
     setErrors({});
+    if (editorValue.length > 2000) {
+      setErrors({
+        name: "Error",
+        message: "the length of your code must be fewer than 2000 characters"
+      });
+      return;
+    }
     if (editorValue) {
       try {
         const results = r.check(editorValue);

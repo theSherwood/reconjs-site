@@ -26,6 +26,11 @@ app.post("*", (req, res) => {
   if (req.body == null) {
     return res.status(400).json({ error: "no JSON object in the request" });
   }
+  if(req.body.code.length > 2000) {
+    return res
+      .status(400)
+      .json({ error: "the length of your code must be fewer than 2000 characters" });
+  }
   if (!r.check(req.body.code)) {
     const newBreach = new Breach(req.body);
     newBreach
