@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 // Create Schema
-const ScoreSchema = new Schema({
+const VictorSchema = new Schema({
   name: {
     type: String
   },
@@ -13,4 +13,4 @@ const ScoreSchema = new Schema({
 });
 
 // Create collection and add schema
-module.exports = Score = mongoose.model("scores", ScoreSchema);
+module.exports = Victor = mongoose.model("victors", VictorSchema);
