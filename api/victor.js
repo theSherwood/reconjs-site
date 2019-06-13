@@ -61,7 +61,13 @@ app.post("*", (req, res) => {
 app.get("*", (req, res) => {
   Victor.find()
     .sort({ date: -1 })
-    .then(victors => res.status(200).json(victors))
+    .then(victors => {
+      const paredVictors = victors.slice(0, 20).map(victor => ({
+        name: victor.name,
+        date: victor.date
+      }));
+      res.status(200).json(paredVictors);
+    })
     .catch(err => res.status(405).json({ error: err }));
 });
 
