@@ -10,6 +10,10 @@ const mockVictors = [
   {
     name: "Jane",
     date: "19470"
+  },
+  {
+    name: "LongNameSusan",
+    date: "19470"
   }
 ];
 
