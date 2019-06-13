@@ -18,6 +18,9 @@ const Editor = () => {
   );
   const [errors, setErrors] = useState({});
   const [showModal, setShowModal] = useState(false);
+  const [breachId, setBreachId] = useState("");
+  const [name, setName] = useState("");
+  const [victors, setVictors] = useState([]);
 
   useEffect(() => {
     CodeMirror = require("react-codemirror2");
@@ -31,7 +34,43 @@ const Editor = () => {
     }
   }, [errors]);
 
+  useEffect(() => {
+    fetch("/api/victor.js")
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        setVictors(data);
+      })
+      .catch(err => console.log(err));
+  }, [breachId]);
+
   const handleSubmit = () => {
+    if (breachId && name) {
+      submitName();
+    } else {
+      submitCode();
+    }
+  };
+
+  const submitName = () => {
+    fetch("/api/victor.js", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name,
+        breachId
+      })
+    })
+      .then(res => res.json())
+      .then(data => console.log(data))
+      .catch(err => console.log(err));
+    setBreachId("");
+  };
+
+  const submitCode = () => {
     setErrors({});
     if (editorValue) {
       try {
@@ -39,20 +78,20 @@ const Editor = () => {
         if (results) {
           setErrors(results);
         } else {
-          const targetString = Math.random.toString();
-          window.target = targetString;
-          const evalGlobal = eval;
-          evalGlobal(editorValue);
-          if (window.target !== targetString) {
-            sumbitToServer(editorValue);
-          } else {
-            setErrors({
-              name: "Failure",
-              message:
-                "your code passed the security check but window.target was unaffected"
-            });
-          }
-          delete window.target;
+          // const targetString = Math.random.toString();
+          // window.target = targetString;
+          // const evalGlobal = eval;
+          // evalGlobal(editorValue);
+          // if (window.target !== targetString) {
+          sumbitCodeToServer(editorValue);
+          // } else {
+          //   setErrors({
+          //     name: "Failure",
+          //     message:
+          //       "your code passed the security check but window.target was unaffected"
+          //   });
+          // }
+          // delete window.target;
         }
       } catch (err) {
         setErrors(err);
@@ -62,7 +101,7 @@ const Editor = () => {
     }
   };
 
-  const sumbitToServer = code => {
+  const sumbitCodeToServer = code => {
     fetch("/api/breach.js", {
       method: "POST",
       headers: {
@@ -74,7 +113,7 @@ const Editor = () => {
       })
     })
       .then(res => res.json())
-      .then(data => console.log(data))
+      .then(data => setBreachId(data))
       .catch(err => console.log(err));
   };
 
@@ -133,7 +172,13 @@ const Editor = () => {
             />
           ) : null}
           {showModal % 3 === 0 ? null : showModal % 3 === 1 ? (
-            <Modal showVictors onKeyDown={handleKeyDown} />
+            <Modal
+              showVictors
+              newVictor={!!breachId}
+              onKeyDown={handleKeyDown}
+              naming={{ name, setName }}
+              victors={victors}
+            />
           ) : (
             <Modal errors={errors} onKeyDown={handleKeyDown} />
           )}
