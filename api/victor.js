@@ -1,7 +1,18 @@
 "use strict";
 
+const mongoose = require("mongoose");
+const Victor = require("../schemas/Victor");
 const express = require("express");
 const bodyParser = require("body-parser");
+
+// Mongoose Connect
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true
+  })
+  .then(() => console.log("MongoDB Connected"))
+  .catch(err => console.log(err));
+
 const app = express();
 
 module.exports = app;
