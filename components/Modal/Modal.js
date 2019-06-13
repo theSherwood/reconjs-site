@@ -1,13 +1,14 @@
 import React, { Fragment } from "react";
 import EditorError from "../EditorError/EditorError";
+import Victors from "../Victors/Victors";
 
-const Modal = ({ errors, victors, onKeyDown }) => {
+const Modal = ({ errors, showVictors, onKeyDown }) => {
   return (
     <Fragment>
       <div className="modal-container" onKeyDown={onKeyDown}>
         <p>Here is some text</p>
         {errors ? <EditorError errors={errors} /> : null}
-        {victors ? <p>TODO: victors</p> : null}
+        {showVictors ? <Victors /> : null}
       </div>
       <style jsx>{`
         .modal-container {

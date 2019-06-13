@@ -115,7 +115,7 @@ const Editor = () => {
             />
           ) : null}
           {showModal % 3 === 0 ? null : showModal % 3 === 1 ? (
-            <Modal victors onKeyDown={handleKeyDown} />
+            <Modal showVictors onKeyDown={handleKeyDown} />
           ) : (
             <Modal errors={errors} onKeyDown={handleKeyDown} />
           )}
