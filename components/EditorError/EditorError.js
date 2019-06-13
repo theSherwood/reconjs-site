@@ -4,21 +4,33 @@ const EditorError = props => {
   const { errors } = props;
   if (!errors || !Object.keys(errors).length)
     return (
-      <Fragment>
+      <div>
         <p>
-          See if you can beat ReconJS by changing the value of window.target
+          Help us improve ReconJS! See if you can beat the securtiy checks and
+          change the value of window.target. We save successful breaches in
+          order to make ReconJS better.
         </p>
         <p>
-          Submit your code using the button at the bottom-left or using
-          Ctrl-Enter
+          Submit your code using the button at the bottom-left (Ctrl-Enter). The
+          bottom-right button (Ctrl-Space) switches between the various views.
+        </p>
+        <p>
+          Change the value of window.target from within the arcade console and
+          add your name to the list of victors!
         </p>
         <style jsx>{`
           p {
             color: #f07669;
             line-height: 1.2em;
           }
+
+          @media only screen and (max-width: 500px) {
+            div {
+              font-size: 0.8em;
+            }
+          }
         `}</style>
-      </Fragment>
+      </div>
     );
 
   let errs;
@@ -44,6 +56,12 @@ const EditorError = props => {
       <style jsx>{`
         div {
           color: #f07669;
+        }
+
+        @media only screen and (max-width: 500px) {
+          div {
+            font-size: 0.8em;
+          }
         }
       `}</style>
     </div>
