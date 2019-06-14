@@ -60,10 +60,11 @@ const Editor = () => {
 
   const handleSubmit = throttle(() => {
     if (submissionInProgress) return;
-    console.log("submit..");
-    if (breachId && name) {
-      setSubmissionInProgress(true);
-      submitName();
+    if (breachId) {
+      if (name.trim()) {
+        setSubmissionInProgress(true);
+        submitName();
+      }
     } else {
       submitCode();
     }
@@ -77,12 +78,12 @@ const Editor = () => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        name,
+        name: name.trim(),
         breachId
       })
     })
       .then(res => res.json())
-      .then(data => {
+      .then(() => {
         setBreachId("");
         setSubmissionInProgress(false);
       })

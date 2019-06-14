@@ -25,10 +25,10 @@ app.post("*", (req, res) => {
     return res.status(400).json({ error: "no JSON object in the request" });
   }
   const { breachId, name } = req.body;
-  if (name.length > 20) {
+  if (name.length > 20 || name.length < 1) {
     return res
       .status(400)
-      .json({ error: "names cannot be over 20 characters in length" });
+      .json({ error: "names must be between 1 and 20 characters in length" });
   }
   Breach.findById(breachId)
     .then(breach => {
