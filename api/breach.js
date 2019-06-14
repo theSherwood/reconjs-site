@@ -33,7 +33,7 @@ app.post("*", (req, res) => {
   }
   if (!r.check(req.body.code)) {
     // rate limit successful breaches to 10 per 24 hour period
-    const limit = 300;
+    const limit = 5;
     const periodInHours = 24;
     Breach.find()
       .sort({ date: -1 })
