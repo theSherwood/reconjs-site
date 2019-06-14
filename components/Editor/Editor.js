@@ -109,21 +109,21 @@ const Editor = () => {
         if (results) {
           setErrors(results);
         } else {
-          // const targetString = Math.random.toString();
-          // window.target = targetString;
-          // const evalGlobal = eval;
-          // evalGlobal(editorValue);
-          // if (window.target !== targetString) {
-          setSubmissionInProgress(true);
-          sumbitCodeToServer(editorValue);
-          // } else {
-          //   setErrors({
-          //     name: "Failure",
-          //     message:
-          //       "your code passed the security check but window.target was unaffected"
-          //   });
-          // }
-          // delete window.target;
+          const targetString = Math.random.toString();
+          window.target = targetString;
+          const evalGlobal = eval;
+          evalGlobal(editorValue);
+          if (window.target !== targetString) {
+            setSubmissionInProgress(true);
+            sumbitCodeToServer(editorValue);
+          } else {
+            setErrors({
+              name: "Failure",
+              message:
+                "your code passed the security check but window.target was unaffected"
+            });
+          }
+          delete window.target;
         }
       } catch (err) {
         setErrors(err);
