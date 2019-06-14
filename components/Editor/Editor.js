@@ -119,15 +119,13 @@ const Editor = () => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
-        setBreachId(data);
-      })
-      .catch(err => {
-        console.log(err);
-        if (err.hasOwnProperty(name) && err.name === "RateLimitError") {
-          setErrors(err);
+        if (data.hasOwnProperty("name") && data.name === "RateLimitError") {
+          setErrors(data);
+        } else {
+          setBreachId(data);
         }
-      });
+      })
+      .catch(err => console.log(err));
   };
 
   const toggleScreens = () => {
