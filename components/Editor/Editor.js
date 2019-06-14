@@ -7,6 +7,23 @@ import CodeMirrorComponent from "./CodeMirrorComponent";
 
 const r = new Recon();
 
+// https://jsfiddle.net/jonathansampson/m7G64/
+function throttle(callback, limit) {
+  var wait = false; // Initially, we're not waiting
+  return function() {
+    // We return a throttled function
+    if (!wait) {
+      // If we're not waiting
+      callback.call(); // Execute users function
+      wait = true; // Prevent future invocations
+      setTimeout(function() {
+        // After a period of time
+        wait = false; // And allow future invocations
+      }, limit);
+    }
+  };
+}
+
 const Editor = () => {
   const [editorValue, setEditorValue] = useState(
     "// TODO: change the value of window.target\n"
@@ -16,6 +33,7 @@ const Editor = () => {
   const [breachId, setBreachId] = useState("");
   const [name, setName] = useState("");
   const [victors, setVictors] = useState([]);
+  const [submissionInProgress, setSubmissionInProgress] = useState(false);
 
   const setEditorAndClear = code => {
     setErrors({});
@@ -40,13 +58,16 @@ const Editor = () => {
     }
   }, [breachId]);
 
-  const handleSubmit = () => {
+  const handleSubmit = throttle(() => {
+    if (submissionInProgress) return;
+    console.log("submit..");
     if (breachId && name) {
+      setSubmissionInProgress(true);
       submitName();
     } else {
       submitCode();
     }
-  };
+  }, 1000);
 
   const submitName = () => {
     fetch("/api/victor.js", {
@@ -62,10 +83,13 @@ const Editor = () => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         setBreachId("");
+        setSubmissionInProgress(false);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        setSubmissionInProgress(false);
+        console.log(err);
+      });
   };
 
   const submitCode = () => {
@@ -89,6 +113,7 @@ const Editor = () => {
           // const evalGlobal = eval;
           // evalGlobal(editorValue);
           // if (window.target !== targetString) {
+          setSubmissionInProgress(true);
           sumbitCodeToServer(editorValue);
           // } else {
           //   setErrors({
@@ -128,8 +153,12 @@ const Editor = () => {
         } else {
           setBreachId(data);
         }
+        setSubmissionInProgress(false);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        setSubmissionInProgress(false);
+        console.log(err);
+      });
   };
 
   const toggleScreens = () => {
