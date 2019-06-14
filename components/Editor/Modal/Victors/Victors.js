@@ -38,9 +38,9 @@ const Victors = ({ victors, newVictor, naming }) => {
           />
         </div>
       ) : null}
-      {victors ? (
+      {victors && victors.length ? (
         <div>
-          <h2>Previous Victors:</h2>
+          <h2>Previous Victors</h2>
           {victors.map((victor, index) => (
             <div className="victor" key={index}>
               <h3>{rainbowize(victor.name)}</h3>
@@ -49,7 +49,10 @@ const Victors = ({ victors, newVictor, naming }) => {
           ))}
         </div>
       ) : (
-        <p>No victors currently</p>
+        <div>
+          <h2>Previous Victors</h2>
+          <p>There aren't any. Be the first!</p>
+        </div>
       )}
       <style jsx>{`
         .victor-container {
@@ -87,7 +90,7 @@ const Victors = ({ victors, newVictor, naming }) => {
           text-align: center;
         }
 
-        p.text-center {
+        p {
           color: #e9eded;
         }
 
