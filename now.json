@@ -8,10 +8,6 @@
       "use": "@now/next"
     },
     {
-      "src": "testLambda.js",
-      "use": "@now/node"
-    },
-    {
       "src": "api/**",
       "use": "@now/node"
     }
