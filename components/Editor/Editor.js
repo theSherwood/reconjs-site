@@ -35,6 +35,9 @@ const Editor = () => {
         setVictors(data);
       })
       .catch(err => console.log(err));
+    if (breachId) {
+      setShowModal(1);
+    }
   }, [breachId]);
 
   const handleSubmit = () => {
@@ -67,10 +70,11 @@ const Editor = () => {
 
   const submitCode = () => {
     setErrors({});
-    if (editorValue.length > 2000) {
+    if (editorValue.length > 2000 || editorValue.length < 20) {
       setErrors({
         name: "Error",
-        message: "the length of your code must be fewer than 2000 characters"
+        message:
+          "the length of your code must be between 20 and 2000 characters"
       });
       return;
     }
