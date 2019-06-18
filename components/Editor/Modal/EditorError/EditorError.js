@@ -4,7 +4,7 @@ const EditorError = props => {
     return (
       <div>
         <p>
-          Help us improve ReconJS! See if you can beat the securtiy checks and
+          Help us improve ReconJS! See if you can beat the security checks and
           change the value of window.target. We save successful breaches in
           order to make ReconJS better.
         </p>
