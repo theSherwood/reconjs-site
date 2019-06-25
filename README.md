@@ -1,46 +1,42 @@
-# Custom Express Server example
+# ReconJS Site
 
-## How to use
+## What's ReconJS
 
-### Using `create-next-app`
+[ReconJS](https://github.com/theSherwood/ReconJS) is a javascript library used for statically analyzing arbitrary Javascript code for security threats.
 
-Execute [`create-next-app`](https://github.com/segmentio/create-next-app) with [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) or [npx](https://github.com/zkat/npx#readme) to bootstrap the example:
+## What is the ReconJS Site?
 
-```bash
-npx create-next-app --example custom-server-express custom-server-express-app
-# or
-yarn create next-app --example custom-server-express custom-server-express-app
-```
+The [ReconJS Site](https://reconjs-site.thesherwood.now.sh/) gamifies improving ReconJS. The site is an adversarial demo of ReconJS. But it's more than that, too. Get past ReconJS' security checks, and your code will be used to improve the ReconJS library.
 
-### Download manually
+## What's the goal?
 
-Download the example:
+Submit code that gets past ReconJS and changes the value of window.target.
 
-```bash
-curl https://codeload.github.com/zeit/next.js/tar.gz/canary | tar -xz --strip=2 next.js-canary/examples/custom-server-express
-cd custom-server-express
-```
+## How does the site work?
 
-Install it and run:
+You type some code into the editor and hit submit it.
 
-```bash
-npm install
-npm run dev
-# or
-yarn
-yarn dev
-```
+ReconJS checks the code for security threats.
 
-Deploy it to the cloud with [now](https://zeit.co/now) ([download](https://zeit.co/download))
+If ReconJS finds no threats :
 
-```bash
-now
-```
+> The `window` object gets a property `target` with a random and arbitrary value.
 
-## The idea behind the example
+> Your code is run.
 
-Most of the times the default Next server will be enough but sometimes you want to run your own server to customize routes or other kind of the app behavior. Next provides a [Custom server and routing](https://github.com/zeit/next.js#custom-server-and-routing) so you can customize as much as you want.
+> The value of `window.target` is read.
 
-Because the Next.js server is just a node.js module you can combine it with any other part of the node.js ecosystem. in this case we are using express to build a custom router on top of Next.
+> If the value of `window.target` has changed :
 
-The example shows a server that serves the component living in `pages/a.js` when the route `/b` is requested and `pages/b.js` when the route `/a` is accessed. This is obviously a non-standard routing strategy. You can see how this custom routing is being made inside `server.js`.
+>> You win! And your code will be saved to a database for improving ReconJS.
+
+> Else :
+
+>> Nothing happens.
+
+> `window.target` is deleted.
+
+Else :
+
+> The specific security threat(s) will be logged to the screen.
+
