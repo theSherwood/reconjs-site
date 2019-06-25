@@ -20,23 +20,23 @@ ReconJS checks the code for security threats.
 
 If ReconJS finds no threats :
 
-> The `window` object gets a property `target` with a random and arbitrary value.
+&nbsp;&nbsp; The `window` object gets a property `target` with a random and arbitrary value.
 
-> Your code is run.
+&nbsp;&nbsp; Your code is run.
 
-> The value of `window.target` is read.
+&nbsp;&nbsp; The value of `window.target` is read.
 
-> If the value of `window.target` has changed :
+&nbsp;&nbsp; If the value of `window.target` has changed :
 
->> You win! And your code will be saved to a database for improving ReconJS.
+&nbsp;&nbsp;&nbsp;&nbsp; You win! And your code will be saved to a database for improving ReconJS.
 
-> Else :
+&nbsp;&nbsp; Else :
 
->> Nothing happens.
+&nbsp;&nbsp;&nbsp;&nbsp; Nothing happens.
 
-> `window.target` is deleted.
+&nbsp;&nbsp; `window.target` is deleted.
 
 Else :
 
-> The specific security threat(s) will be logged to the screen.
+&nbsp;&nbsp; The specific security threat(s) will be logged to the screen.
 
