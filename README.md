@@ -6,7 +6,7 @@
 
 ## What is the ReconJS Site?
 
-The [ReconJS Site](https://reconjs-site.thesherwood.now.sh/) gamifies improving ReconJS. The site is an adversarial demo of ReconJS. But it's more than that, too. Get past ReconJS' security checks, and your code will be used to improve the ReconJS library.
+The [ReconJS Site](https://reconjs-site.thesherwood.vercel.app/) gamifies improving ReconJS. The site is an adversarial demo of ReconJS. But it's more than that, too. Get past ReconJS' security checks, and your code will be used to improve the ReconJS library.
 
 ## What's the goal?
 
